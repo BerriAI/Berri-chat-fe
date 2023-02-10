@@ -33,7 +33,7 @@ export default function Home({ chatId }) {
 
   // Handle errors
   const handleError = () => {
-    setMessages((prevMessages) => [...prevMessages, { "message": "Oops! There seems to be an error. Please try again.", "type": "apiMessage" }]);
+    setMessages((prevMessages) => [...prevMessages, { "message": "Oops! There seems to be an error. Reach out to us here: https://discord.gg/KvG3azf39U", "type": "apiMessage" }]);
     setLoading(false);
     setUserInput("");
   }

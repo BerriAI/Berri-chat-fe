@@ -25,7 +25,7 @@ export default async function(req, res) {
     console.log(error);
     console.error(error);
     const data = error;
-    res.status(200).json({ result: data })
+    res.status(404).json({ result: { success: data } })
   }
 
   
