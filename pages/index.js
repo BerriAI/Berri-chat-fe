@@ -72,7 +72,20 @@ export default function Home({ chatId }) {
       return;
     }
 
-    setMessages((prevMessages) => [...prevMessages, { "message": data.result.success, "type": "apiMessage" }]);
+    if (typeof data.result.success === "object") {
+      console.log("data.result.success is an object");
+      // data.result.success.response
+      setMessages((prevMessages) => [...prevMessages, { "message": data.result.success.response, "type": "apiMessage" }]);
+      // data.result.success.references
+      setMessages((prevMessages) => [...prevMessages, { "message": "Here is what I looked at: \n" + data.result.success.references, "type": "apiMessage" }]);
+
+
+    } else if (typeof data.result.success === "string") {
+        setMessages((prevMessages) => [...prevMessages, { "message": data.result.success, "type": "apiMessage" }]);
+      console.log("data.result.success is a string");
+    }
+    
+
     setLoading(false);
     
   };
