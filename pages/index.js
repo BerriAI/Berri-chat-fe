@@ -5,7 +5,7 @@ import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function Home() {
+export default function Home({ chatId }) {
 
   const [userInput, setUserInput] = useState("");
   const [history, setHistory] = useState([]);
@@ -55,7 +55,7 @@ export default function Home() {
       headers: {
           "Content-Type": "application/json",
       },
-      body: JSON.stringify({ question: userInput, history: history }),
+      body: JSON.stringify({ chatId: chatId, question: userInput, history: history }),
     });
 
     if (!response.ok) {
@@ -98,18 +98,19 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>LangChain Chat</title>
+        <title>BerriAI Chat</title>
         <meta name="description" content="LangChain documentation chatbot" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.topnav}>
       <div className = {styles.navlogo}>
-    <a href="/">LangChain</a>
+    <a href="/">BerriAI</a>
     </div>
     <div className = {styles.navlinks}>
-    <a href="https://langchain.readthedocs.io/en/latest/" target="_blank">Docs</a>
-    <a href="https://github.com/zahidkhawaja/langchain-chat-nextjs" target="_blank">GitHub</a>
+    <a href="https://berri.ai/" target="_blank">Website</a>
+    <a href="Discord" target="_blank">Discord</a>
+    <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a>
     </div>
 </div>
       <main className={styles.main}>
@@ -163,7 +164,7 @@ export default function Home() {
             </form>
             </div>
             <div className = {styles.footer}>
-            <p>Powered by <a href = "https://github.com/hwchase17/langchain" target="_blank">LangChain</a>. Built by <a href="https://twitter.com/chillzaza_" target="_blank">Zahid</a>.</p>
+            <p>Powered by <a href = "https://github.com/ClerkieAI/berri_ai" target="_blank">BerriAI</a></p>
             </div>
         </div>
       </main>
