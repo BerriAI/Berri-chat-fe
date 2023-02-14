@@ -1,14 +1,11 @@
 export default async function(req, res) {
-
-
   let query = req.body.question;
-  console.log(req.query);
-  console.log(req.body);
+  console.log("got query on FE");
+  console.log(query);
   let chatId = req.body.chatId;
   const base64 = require('base64-js');
   const decoded_data = base64.toByteArray(chatId);
   const zeet_url = new TextDecoder().decode(decoded_data);
-
   let endpoint = "";
   console.log(zeet_url);
   if (zeet_url.includes("berri_query")) {
@@ -18,7 +15,7 @@ export default async function(req, res) {
     endpoint = zeet_url + '/langchain_agent?query=';
   }
 
-  console.log("IN SEARCH TRIGGERED");
+  console.log("Query TRIGGERED");
   console.log(endpoint + query);
   try {
     const response = await fetch(endpoint + query, { timeout: 60 * 1000 });
