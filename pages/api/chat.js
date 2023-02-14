@@ -21,7 +21,7 @@ export default async function(req, res) {
   console.log("IN SEARCH TRIGGERED");
   console.log(endpoint + query);
   try {
-    const response = await fetch(endpoint + query);
+    const response = await fetch(endpoint + query, { timeout: 20 * 1000 });
     const data = await response.json();
     console.log("GOT DATA");
 
