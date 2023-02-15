@@ -5,10 +5,14 @@ import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import CircularProgress from '@mui/material/CircularProgress';
 import base64 from 'base64-js';
+import mixpanel from 'mixpanel-browser';
+import Cohere from "cohere-js";
 
 export default function Home({ chatId }) {
   let api_endpoint = "";
   let zeet_url = "";
+  Cohere.init("62jzwJUv0fJjYs0e-t6jceIF");
+  mixpanel.init('69c4620538e80373ae4ef8edb32ce5e3', { debug: true, ignore_dnt: true });
   if (chatId) {
     const decoded_data = base64.toByteArray(chatId);
     zeet_url = new TextDecoder().decode(decoded_data);
@@ -144,8 +148,13 @@ export default function Home({ chatId }) {
           <a href="/">BerriAI</a>
         </div>
         <div className={styles.navlinks}>
-
-                <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank">Code for this App</a>
+                <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank" onClick={() => {
+  try {
+      mixpanel.track("code.button.clicked")
+    } catch (err) {
+      console.error(err)
+    }
+}}>Code for this App</a>
 
           <a href="https://calendly.com/d/xz2-fqd-gqz/berri-ai-ishaan-krrish" target="_blank">Schedule Demo</a>
           <a href="https://berri.ai/" target="_blank">BerriAI</a>
@@ -163,9 +172,9 @@ export default function Home({ chatId }) {
                   {/* Display the correct icon depending on the message type */}
                   <div className={styles.iconWrapper}>
                     {message.type === "apiMessage" ? (
-                      <Image src="/parroticon.png" alt="AI" width="30" height="30" priority={true} />
+                      <Image src="/parroticon.png" alt="AI" width="30" height="30" priority={true} className={styles.iconWrapper}/>
                     ) : (
-                      <Image src="/usericon.png" alt="Me" width="30" height="30" priority={true} />
+                      <Image src="/usericon.png" alt="Me" width="30" height="30" priority={true} className={styles.iconWrapper}/>
                     )}
                   </div>
 
@@ -213,7 +222,14 @@ export default function Home({ chatId }) {
               <div className="w-full flex pt-10 text-center">
                 <input type="text" readOnly className="w-5/6 rounded-lg border border-gray-700 bg-transparent p-2 text-sm mr-2" value={api_endpoint} />
 
-                <button onClick={() => { navigator.clipboard.writeText(api_endpoint) }} className="flex h-full w-1/6 items-center justify-center rounded-lg border border-gray-400 py-2 text-gray-600 hover:bg-gray-200">
+                <button onClick={() => {
+  navigator.clipboard.writeText(api_endpoint);
+  try {
+      mixpanel.track("api.endpoint.copied")
+    } catch (err) {
+      console.error(err)
+    }
+}} className="flex h-full w-1/6 items-center justify-center rounded-lg border border-gray-400 py-2 text-gray-600 hover:bg-gray-200">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
                   </svg>
