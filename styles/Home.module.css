@@ -33,7 +33,7 @@
 }
 
 .navlinks {
-  width: 20rem;
+  width: 40rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -194,10 +194,14 @@
   margin: 1rem;
 }
 
-.boticon, .usericon {
+.iconWrapper {
   margin-right: 1rem;
   border-radius: 0.1rem;
+  width: 30px;
+  height: 30px;
+  /* add any other custom styles here */
 }
+
 
 .markdownanswer h1, .markdownanswer h2, .markdownanswer h3 {
   font-size: inherit;

@@ -14,14 +14,12 @@ export default async function(req, res) {
   } else {
     endpoint = zeet_url + '/langchain_agent?query=';
   }
-
   console.log("Query TRIGGERED");
   console.log(endpoint + query);
   try {
     const response = await fetch(endpoint + query, { timeout: 60 * 1000 });
     const data = await response.json();
     console.log("GOT DATA");
-
     res.status(200).json({ result: { success: data } })
 
 

@@ -4,9 +4,25 @@ import styles from '../styles/Home.module.css'
 import Image from 'next/image'
 import ReactMarkdown from 'react-markdown'
 import CircularProgress from '@mui/material/CircularProgress';
+import base64 from 'base64-js';
 
 export default function Home({ chatId }) {
-
+  let api_endpoint = "";
+  let zeet_url = "";
+  if (chatId) {
+    const decoded_data = base64.toByteArray(chatId);
+    zeet_url = new TextDecoder().decode(decoded_data);
+    console.log(zeet_url);
+    if (zeet_url.includes("berri_query")) {
+      // send request to GPT Index server for top of funnel
+      api_endpoint = zeet_url + "&query="
+    } else {
+      api_endpoint = zeet_url + '/langchain_agent?query=';
+    }
+  }
+  console.log("api endpoint");
+  console.log(api_endpoint);
+  console.log(zeet_url);
   const [userInput, setUserInput] = useState("");
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -128,8 +144,12 @@ export default function Home({ chatId }) {
           <a href="/">BerriAI</a>
         </div>
         <div className={styles.navlinks}>
-          <a href="https://berri.ai/" target="_blank">Website</a>
-          <a href="Discord" target="_blank">Discord</a>
+
+                <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank">Code for this App</a>
+
+          <a href="https://calendly.com/d/xz2-fqd-gqz/berri-ai-ishaan-krrish" target="_blank">Schedule Demo</a>
+          <a href="https://berri.ai/" target="_blank">BerriAI</a>
+          <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a>
           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a>
         </div>
       </div>
@@ -141,7 +161,14 @@ export default function Home({ chatId }) {
                 // The latest message sent by the user will be animated while waiting for a response
                 <div key={index} className={message.type === "userMessage" && loading && index === messages.length - 1 ? styles.usermessagewaiting : message.type === "apiMessage" ? styles.apimessage : styles.usermessage}>
                   {/* Display the correct icon depending on the message type */}
-                  {message.type === "apiMessage" ? <Image src="/parroticon.png" alt="AI" width="30" height="30" className={styles.boticon} priority={true} /> : <Image src="/usericon.png" alt="Me" width="30" height="30" className={styles.usericon} priority={true} />}
+                  <div className={styles.iconWrapper}>
+                    {message.type === "apiMessage" ? (
+                      <Image src="/parroticon.png" alt="AI" width="30" height="30" priority={true} />
+                    ) : (
+                      <Image src="/usericon.png" alt="Me" width="30" height="30" priority={true} />
+                    )}
+                  </div>
+
                   <div className={styles.markdownanswer}>
                     {/* Messages are being rendered in Markdown format */}
                     <ReactMarkdown linkTarget={"_blank"}>{message.message}</ReactMarkdown>
@@ -182,9 +209,21 @@ export default function Home({ chatId }) {
                   </svg>}
               </button>
             </form>
+            <div className="h-64 w-full flex-wrap items-start justify-between">
+              <div className="w-full flex pt-10 text-center">
+                <input type="text" readOnly className="w-5/6 rounded-lg border border-gray-700 bg-transparent p-2 text-sm mr-2" value={api_endpoint} />
+
+                <button onClick={() => { navigator.clipboard.writeText(api_endpoint) }} className="flex h-full w-1/6 items-center justify-center rounded-lg border border-gray-400 py-2 text-gray-600 hover:bg-gray-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
+                  </svg>
+                </button>
+              </div>
+              <p className="text-center text-sm mt-5 text-gray-400">Copy your API Endpoint for this QA bot</p>
+            </div>
+
           </div>
           <div className={styles.footer}>
-            <p>Your API endpoint <a href="Your API Endpoint: " target="_blank">BerriAI</a></p>
             <p>Powered by <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">BerriAI</a></p>
           </div>
         </div>
