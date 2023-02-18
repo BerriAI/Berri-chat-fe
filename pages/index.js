@@ -58,6 +58,15 @@ export default function Home({ chatId }) {
     setUserInput("");
   }
 
+  // Create an event handler for the buttons
+  const handleUserFeedback = (system_response, user_reaction, corrected_response) => {
+    // Send a request to the API with the user's selection
+    fetch(`https://BerriPromptLogsAPI.krrishdholakia.repl.co/add_log?repo=${api_endpoint}&user_message=${messages}&system_response=${system_response}&user_reaction=${user_reaction}&corrected_response=${corrected_response}`).then(() => {
+      // Do something after the request is successful
+      console.log("successfully posted")
+    });
+  }
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -148,16 +157,15 @@ export default function Home({ chatId }) {
           <a href="/">BerriAI</a>
         </div>
         <div className={styles.navlinks}>
-                <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank" onClick={() => {
-  try {
-      mixpanel.track("code.button.clicked")
-    } catch (err) {
-      console.error(err)
-    }
-}}>Code for this App</a>
+          <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank" onClick={() => {
+            try {
+              mixpanel.track("code.button.clicked")
+            } catch (err) {
+              console.error(err)
+            }
+          }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Edit the Code</a>
 
           <a href="https://calendly.com/d/xz2-fqd-gqz/berri-ai-ishaan-krrish" target="_blank">Schedule Demo</a>
-          <a href="https://berri.ai/" target="_blank">BerriAI</a>
           <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a>
           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a>
         </div>
@@ -172,16 +180,18 @@ export default function Home({ chatId }) {
                   {/* Display the correct icon depending on the message type */}
                   <div className={styles.iconWrapper}>
                     {message.type === "apiMessage" ? (
-                      <Image src="/parroticon.png" alt="AI" width="30" height="30" priority={true} className={styles.iconWrapper}/>
+                      <Image src="/parroticon.png" alt="AI" width="30" height="30" priority={true} className={styles.iconWrapper} />
                     ) : (
-                      <Image src="/usericon.png" alt="Me" width="30" height="30" priority={true} className={styles.iconWrapper}/>
+                      <Image src="/usericon.png" alt="Me" width="30" height="30" priority={true} className={styles.iconWrapper} />
                     )}
                   </div>
 
-                  <div className={styles.markdownanswer}>
+                  <div class="relative flex w-[calc(100%-50px)] flex-col gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                     {/* Messages are being rendered in Markdown format */}
                     <ReactMarkdown linkTarget={"_blank"}>{message.message}</ReactMarkdown>
                   </div>
+                  {/* Add two buttons for thumbs up/thumbs down */}
+                    {message.type === "apiMessage" ? <div class="text-gray-400 float-right"><button class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400"  onClick={() => handleUserFeedback(message.message, "thumbs_up", "")} ><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></button><button class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400" onClick={() => handleUserFeedback(message.message, "thumbs_down", "")} ><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg></button></div>: null}
                 </div>
               )
             })}
@@ -223,13 +233,13 @@ export default function Home({ chatId }) {
                 <input type="text" readOnly className="w-5/6 rounded-lg border border-gray-700 bg-transparent p-2 text-sm mr-2" value={api_endpoint} />
 
                 <button onClick={() => {
-  navigator.clipboard.writeText(api_endpoint);
-  try {
-      mixpanel.track("api.endpoint.copied")
-    } catch (err) {
-      console.error(err)
-    }
-}} className="flex h-full w-1/6 items-center justify-center rounded-lg border border-gray-400 py-2 text-gray-600 hover:bg-gray-200">
+                  navigator.clipboard.writeText(api_endpoint);
+                  try {
+                    mixpanel.track("api.endpoint.copied")
+                  } catch (err) {
+                    console.error(err)
+                  }
+                }} className="flex h-full w-1/6 items-center justify-center rounded-lg border border-gray-400 py-2 text-gray-600 hover:bg-gray-200">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
                   </svg>
