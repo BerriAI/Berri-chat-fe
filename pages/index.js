@@ -61,7 +61,7 @@ export default function Home({ chatId }) {
   // Create an event handler for the buttons
   const handleUserFeedback = (system_response, user_reaction, corrected_response) => {
     // Send a request to the API with the user's selection
-    fetch(`https://BerriPromptLogsAPI.krrishdholakia.repl.co/add_log?repo=${api_endpoint}&user_message=${messages}&system_response=${system_response}&user_reaction=${user_reaction}&corrected_response=${corrected_response}`).then(() => {
+    fetch(`https://BerriPromptLogsAPI.krrishdholakia.repl.co/add_log?repo=${api_endpoint}&user_message=${encodeURIComponent(JSON.stringify(messages))}&system_response=${system_response}&user_reaction=${user_reaction}&corrected_response=${corrected_response}`).then(() => {
       // Do something after the request is successful
       console.log("successfully posted")
     });
@@ -100,7 +100,6 @@ export default function Home({ chatId }) {
     }
 
     // Reset user input
-    // first of many to save vercel money
     setUserInput("");
     const data = await response.json();
 
@@ -158,17 +157,23 @@ export default function Home({ chatId }) {
           <a href="/">BerriAI</a>
         </div>
         <div className={styles.navlinks}>
-          <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank" onClick={() => {
+{/*           <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank" onClick={() => {
             try {
               mixpanel.track("code.button.clicked")
             } catch (err) {
               console.error(err)
             }
-          }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Edit the Code</a>
+          }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Edit the Code</a> */}
 
-          <a href="https://calendly.com/d/xz2-fqd-gqz/berri-ai-ishaan-krrish" target="_blank">Schedule Demo</a>
-          <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a>
-          <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a>
+          <a href="https://calendly.com/d/xz2-fqd-gqz/berri-ai-ishaan-krrish" target="_blank" onClick={() => {
+            try {
+              mixpanel.track("schedule.demo.button.clicked")
+            } catch (err) {
+              console.error(err)
+            }
+          }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Schedule Demo</a>
+{/*           <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a> */}
+{/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
         </div>
       </div>
       <main className={styles.main}>
