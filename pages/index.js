@@ -100,6 +100,7 @@ export default function Home({ chatId }) {
     }
 
     // Reset user input
+    // comment 2 for krrish
     setUserInput("");
     const data = await response.json();
 
