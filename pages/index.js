@@ -100,6 +100,7 @@ export default function Home({ chatId }) {
     }
 
     // Reset user input
+    // first of many to save vercel money
     setUserInput("");
     const data = await response.json();
 
