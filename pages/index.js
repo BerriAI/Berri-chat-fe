@@ -8,6 +8,19 @@ import base64 from 'base64-js';
 import mixpanel from 'mixpanel-browser';
 import Cohere from "cohere-js";
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '20px'
+  }
+};
+
+
 export default function Home({ chatId }) {
   let api_endpoint = "";
   let zeet_url = "";
@@ -28,6 +41,9 @@ export default function Home({ chatId }) {
   console.log(api_endpoint);
   console.log(zeet_url);
   const [userInput, setUserInput] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [systemResponse, setSystemResponse] = useState(null);
+  const [feedbackType, setfeedbackType] = useState(null);
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([
@@ -59,9 +75,11 @@ export default function Home({ chatId }) {
   }
 
   // Create an event handler for the buttons
-  const handleUserFeedback = (system_response, user_reaction, corrected_response) => {
+  const handleUserFeedback = (system_response) => {
+    // Get the value of the textarea
+    const corrected_response = document.getElementById('feedback-other').value;
     // Send a request to the API with the user's selection
-    fetch(`https://BerriPromptLogsAPI.krrishdholakia.repl.co/add_log?repo=${api_endpoint}&user_message=${encodeURIComponent(JSON.stringify(messages))}&system_response=${system_response}&user_reaction=${user_reaction}&corrected_response=${corrected_response}`).then(() => {
+    fetch(`https://BerriPromptLogsAPI.krrishdholakia.repl.co/add_log?repo=${api_endpoint}&user_message=${encodeURIComponent(JSON.stringify(messages))}&system_response=${systemResponse}&user_reaction=${feedbackType}&corrected_response=${corrected_response}`).then(() => {
       // Do something after the request is successful
       console.log("successfully posted")
     });
@@ -100,7 +118,6 @@ export default function Home({ chatId }) {
     }
 
     // Reset user input
-    // comment 2 for krrish
     setUserInput("");
     const data = await response.json();
 
@@ -138,6 +155,18 @@ export default function Home({ chatId }) {
     }
   };
 
+  // Define a function to open the modal
+  const openModal = (message) => {
+    setModalOpen(true);
+    setSystemResponse(message.message)
+  };
+
+  // Define a function to close the modal
+  const closeModal = () => {
+    setModalOpen(false);
+    handleUserFeedback()
+  };
+
   // Keep history in sync with messages
   useEffect(() => {
     if (messages.length >= 3) {
@@ -158,7 +187,7 @@ export default function Home({ chatId }) {
           <a href="/">BerriAI</a>
         </div>
         <div className={styles.navlinks}>
-{/*           <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank" onClick={() => {
+          {/*           <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank" onClick={() => {
             try {
               mixpanel.track("code.button.clicked")
             } catch (err) {
@@ -173,11 +202,12 @@ export default function Home({ chatId }) {
               console.error(err)
             }
           }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Schedule Demo</a>
-{/*           <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a> */}
-{/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
+          {/*           <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a> */}
+          {/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
         </div>
       </div>
       <main className={styles.main}>
+        {modalOpen ? <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500/90 transition-opacity dark:bg-gray-800/90"><div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all dark:bg-gray-900 sm:my-8 sm:w-full sm:p-6 sm:max-w-lg" id="headlessui-dialog-panel-:ra:" data-headlessui-state="open"><div class="flex items-center sm:flex"><div class="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 bg-green-100"><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-green-700" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div><div class="mt-3 text-center sm:mt-0 sm:text-left"><h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200" id="headlessui-dialog-title-:rb:" data-headlessui-state="open">Provide additional feedback</h3></div></div><form><textarea id="feedback-other" placeholder="What would the ideal answer have been?" rows="3" class="mt-4 mb-1 w-full rounded-md dark:bg-gray-800 dark:focus:border-white dark:focus:ring-white" style={{ "height": "90px", "overflow-y": "hidden" }} tabindex="0"></textarea></form><div class="mt-5 flex flex-col gap-3 sm:mt-4 sm:flex-row-reverse"><button class="btn flex justify-center gap-2 btn-neutral" onClick={closeModal}>Submit feedback</button></div></div></div> : null}
         <div className={styles.cloud}>
           <div ref={messageListRef} className={styles.messagelist}>
             {messages.map((message, index) => {
@@ -198,7 +228,7 @@ export default function Home({ chatId }) {
                     <ReactMarkdown linkTarget={"_blank"}>{message.message}</ReactMarkdown>
                   </div>
                   {/* Add two buttons for thumbs up/thumbs down */}
-                    {message.type === "apiMessage" ? <div class="text-gray-400 float-right"><button class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400"  onClick={() => handleUserFeedback(message.message, "thumbs_up", "")} ><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></button><button class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400" onClick={() => handleUserFeedback(message.message, "thumbs_down", "")} ><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg></button></div>: null}
+                  {message.type === "apiMessage" ? <div class="text-gray-400 float-right"><button class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400" onClick={() => { setfeedbackType("thumbs_up"); openModal(message) }} ><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></button><button class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400" onClick={() => { setfeedbackType("thumbs_down"); openModal(message) }} ><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg></button></div> : null}
                 </div>
               )
             })}
