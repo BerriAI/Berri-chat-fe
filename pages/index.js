@@ -29,6 +29,11 @@ export default function Home({ chatId }) {
   let zeet_url = "";
   Cohere.init("62jzwJUv0fJjYs0e-t6jceIF");
   mixpanel.init('69c4620538e80373ae4ef8edb32ce5e3', { debug: true, ignore_dnt: true });
+  try {
+    mixpanel.track("chat.app.reached")
+  } catch (err) {
+    console.error(err)
+  }
   if (chatId) {
     const decoded_data = base64.toByteArray(chatId);
     zeet_url = new TextDecoder().decode(decoded_data);
