@@ -1,3 +1,4 @@
+
 .main {
   display: flex;
   flex-direction: column;
@@ -202,6 +203,7 @@
 }
 
 
+
 .markdownanswer h1, .markdownanswer h2, .markdownanswer h3 {
   font-size: inherit;
 }
@@ -288,4 +290,71 @@
   width: 100%;
   text-align: center;
 }
+.dropdown-container {
+  display: flex;
+  justify-content: left;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  z-index: 1;
+}
+
+.dropdown-content p {
+  margin: 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.refsWrapper {
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  color: #4B5563;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expanded {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.collapseIcon {
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+
+
+
 }

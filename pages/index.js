@@ -8,6 +8,8 @@ import base64 from 'base64-js';
 import mixpanel from 'mixpanel-browser';
 import Cohere from "cohere-js";
 
+
+
 const customStyles = {
   content: {
     top: '50%',
@@ -53,6 +55,13 @@ export default function Home({ chatId }) {
       "type": "apiMessage"
     }
   ]);
+  const [showReferences, setShowReferences] = useState(false);
+  const handleShowReferences = () => {
+    console.log("Reference Toggle");
+    setShowReferences(!showReferences);
+    console.log(showReferences);
+  };
+
 
   const messageListRef = useRef(null);
   const textAreaRef = useRef(null);
@@ -130,9 +139,20 @@ export default function Home({ chatId }) {
     if (typeof data.result.success === "object") {
       console.log("data.result.success is an object");
       // data.result.success.response
-      setMessages((prevMessages) => [...prevMessages, { "message": data.result.success.response, "type": "apiMessage" }]);
+      setMessages((prevMessages) => [
+        ...prevMessages.map((message) => ({ ...message, mostRecent: false })),
+        { message: data.result.success.response, type: "apiMessage", references: data.result.success.references, mostRecent: true },
+      ]);
+
+      console.log(data.result.success.references);
+
       // data.result.success.references
-      setMessages((prevMessages) => [...prevMessages, { "message": "Here is what I looked at: \n" + data.result.success.references, "type": "apiMessage" }]);
+      //setMessages((prevMessages) => [...prevMessages, { "message": data.result.success.references, "type": "apiMessage" }]);
+
+
+
+
+
 
 
     } else if (typeof data.result.success === "string") {
@@ -203,6 +223,7 @@ export default function Home({ chatId }) {
               console.error(err)
             }
           }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Schedule Demo</a>
+          <a href="https://berri.ai/" target="_blank" style={{ padding: "2%", backgroundColor: "#048c2c", borderRadius: "10px" }}>+ New App</a>
           {/*           <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a> */}
           {/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
         </div>
@@ -227,7 +248,53 @@ export default function Home({ chatId }) {
                   <div class="relative flex w-[calc(100%-50px)] flex-col gap-1 md:gap-3 lg:w-[calc(100%-115px)]">
                     {/* Messages are being rendered in Markdown format */}
                     <ReactMarkdown linkTarget={"_blank"}>{message.message}</ReactMarkdown>
+                    {message.type === "apiMessage" && message.mostRecent && (
+                      <div className="refs-container">
+                        <div className="button-container">
+                          <button
+                            className={`${styles.refsWrapper} ${showReferences ? styles.expanded : ""
+                              }`}
+                            onClick={handleShowReferences}
+                            style={{
+                              padding: "1%",
+                              backgroundColor: "transparent",
+                              border: "1px solid #fff",
+                              borderRadius: "5px",
+                              color: "#fff",
+                              fontSize: "0.8em",
+                            }}
+                          >
+                            <span className={styles.collapseIcon}>
+                              {showReferences ? "▲" : "▼"}
+                            </span>
+                            {showReferences ? "Hide References" : "Show References"}
+
+                          </button>
+                        </div>
+                        {showReferences && message.mostRecent && message.references && (
+                          <div className="references">
+                            {typeof message.references === "string" ? (
+                              <div>
+                                <p>{message.references}...</p>
+                              </div>
+                            ) : (
+                              message.references
+                                .filter((ref) => ref.message_id === message.mostRecent.id)
+                                .map((ref, index) => (
+                                  <div key={index}>
+                                    <h2>Source Text:</h2>
+                                    <p>{ref.source_text.slice(0, 500)}....</p>
+                                    <h2>Similarity:</h2>
+                                    <p>{ref.similarity * 100}%</p>
+                                  </div>
+                                ))
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
+
                   {/* Add two buttons for thumbs up/thumbs down */}
                   {message.type === "apiMessage" ? <div class="text-gray-400 float-right"><button class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400" onClick={() => { setfeedbackType("thumbs_up"); openModal(message) }} ><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></button><button class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400" onClick={() => { setfeedbackType("thumbs_down"); openModal(message) }} ><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg></button></div> : null}
                 </div>
