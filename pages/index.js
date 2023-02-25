@@ -356,7 +356,11 @@ export default function Home({ chatId }) {
                 </button>
               </div>
               <p className="text-center text-sm mt-5 text-gray-400">Copy your API Endpoint for this QA bot</p>
+              <p className="text-center text-sm mt-5 text-gray-400">Contact us, Email: krrishdholakia@berri.ai, Phone/Text: +1 412-618-6238</p>
+
+
             </div>
+
 
           </div>
           <div className={styles.footer}>
