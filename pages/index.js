@@ -23,6 +23,18 @@ const customStyles = {
 };
 // vercel 1
 
+// Define a function to open the modal
+const openModal = (message) => {
+  setModalOpen(true);
+  setSystemResponse(message.message)
+};
+
+// Define a function to close the modal
+const closeModal = () => {
+  setModalOpen(false);
+  handleUserFeedback()
+};
+
 
 export default function Home({ chatId }) {
   let api_endpoint = "";
