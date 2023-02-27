@@ -179,7 +179,7 @@ export default function Home({ chatId }) {
       e.preventDefault();
     }
   };
-  
+
   // Define a function to open the modal
   const openModal = (message) => {
     setModalOpen(true);

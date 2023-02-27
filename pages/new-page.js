@@ -43,7 +43,7 @@ export default function NewPage() {
             <button onClick={() => {
               navigator.clipboard.writeText(prefix + api_endpoint);
               try {
-                mixpanel.track("api.endpoint.copied")
+                mixpanel.track("slack.endpoint.copied")
               } catch (err) {
                 console.error(err)
               }
