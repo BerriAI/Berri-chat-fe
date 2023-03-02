@@ -86,6 +86,11 @@ export default function Home({ chatId }) {
     setMessages((prevMessages) => [...prevMessages, { "message": "Oops! There seems to be an error. Reach out to us here: https://discord.gg/KvG3azf39U", "type": "apiMessage" }]);
     setLoading(false);
     setUserInput("");
+    try {
+      mixpanel.track("frontend.message.error")
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   // Create an event handler for the buttons
