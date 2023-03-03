@@ -8,7 +8,10 @@ import base64 from 'base64-js';
 import mixpanel from 'mixpanel-browser';
 import Cohere from "cohere-js";
 import Link from 'next/link';
+import Bugsnag from '@bugsnag/js'
 
+Bugsnag.start({ apiKey: '6f3e42ec2b626188350d6820f1c713f0' })
+//Bugsnag.notify(new Error('Test error'))
 
 const customStyles = {
   content: {
@@ -86,11 +89,14 @@ export default function Home({ chatId }) {
     setMessages((prevMessages) => [...prevMessages, { "message": "Oops! There seems to be an error. Reach out to us here: https://discord.gg/KvG3azf39U", "type": "apiMessage" }]);
     setLoading(false);
     setUserInput("");
-    try {
-      mixpanel.track("frontend.message.error")
-    } catch (err) {
-      console.error(err)
-    }
+    Bugsnag.notify(new Error('Frontend OOPs error'), function(event) {
+      //if (event.getUser().id === '1') return false
+      event.severity = 'warning'
+      event.addMetadata('QueryInfo', { 
+        query: userInput,
+        api_endpoint: api_endpoint
+      })
+    })
   }
 
   // Create an event handler for the buttons
