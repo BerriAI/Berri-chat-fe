@@ -92,7 +92,7 @@ export default function Home({ chatId }) {
     Bugsnag.notify(new Error('Frontend OOPs error'), function(event) {
       //if (event.getUser().id === '1') return false
       event.severity = 'warning'
-      event.addMetadata('QueryInfo', { 
+      event.addMetadata('QueryInfo', {
         query: userInput,
         api_endpoint: api_endpoint
       })
@@ -307,7 +307,7 @@ export default function Home({ chatId }) {
                                 .map((ref, index) => (
                                   <div key={index}>
                                     <h2>Source Text:</h2>
-                                    <p>{ref.source_text.slice(0, 500)}....</p>
+                                    <p>{ref.source_text}....</p>
                                     <h2>Similarity:</h2>
                                     <p>{ref.similarity * 100}%</p>
                                   </div>
