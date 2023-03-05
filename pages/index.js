@@ -248,10 +248,16 @@ export default function Home({ chatId }) {
 
 
 
+
+
           {/*           <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a> */}
           {/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
         </div>
       </div>
+      <p className="text-center text-sm mt-5 text-gray-400">Free plan: This app lives for 7 days, Sign up for our BerriAI:
+        <a href="https://checkout.stripe.com/c/pay/cs_live_a1nhMmn3xZ6vbN9siaOHNIXiUSzk5EtRK9gvJWUiISn1AOxSvNhjAPpFR9#fidkdWxOYHwnPyd1blppbHNgWjA0SGFXQTxGMnFGXWk0TVRLbmpRVUl8SGdJRGphQTFfbUtKY0ozaEpnNjdwNFZCTTRUNU5fR09rfExiTjNxcmNxfWRHZFdKXU1mYl1GcFRdfDZDc0k2UTB1NTVDdzV8VlFAQycpJ3VpbGtuQH11anZgYUxhJz8nMG5EMW41NnFjMUk9M2R2YFBSJ3gl" target="_blank"> paid plan here</a>
+
+      </p>
       <main className={styles.main}>
         {modalOpen ? <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500/90 transition-opacity dark:bg-gray-800/90"><div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all dark:bg-gray-900 sm:my-8 sm:w-full sm:p-6 sm:max-w-lg" id="headlessui-dialog-panel-:ra:" data-headlessui-state="open"><div class="flex items-center sm:flex"><div class="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 bg-green-100"><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-green-700" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div><div class="mt-3 text-center sm:mt-0 sm:text-left"><h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200" id="headlessui-dialog-title-:rb:" data-headlessui-state="open">Provide additional feedback</h3></div></div><form><textarea id="feedback-other" placeholder="What would the ideal answer have been?" rows="3" class="mt-4 mb-1 w-full rounded-md dark:bg-gray-800 dark:focus:border-white dark:focus:ring-white" style={{ "height": "90px", "overflow-y": "hidden" }} tabindex="0"></textarea></form><div class="mt-5 flex flex-col gap-3 sm:mt-4 sm:flex-row-reverse"><button class="btn flex justify-center gap-2 btn-neutral" onClick={closeModal}>Submit feedback</button></div></div></div> : null}
         <div className={styles.cloud}>
@@ -375,7 +381,7 @@ export default function Home({ chatId }) {
                 </button>
               </div>
               <p className="text-center text-sm mt-5 text-gray-400">Copy your API Endpoint for this QA bot</p>
-              <p className="text-center text-sm mt-5 text-gray-400">Contact us, Email: krrishdholakia@berri.ai, Phone/Text: +1 412-618-6238</p>
+              <p className="text-center text-sm mt-5 text-gray-400">Contact us, Email: ishaan@berri.ai, krrishdholakia@berri.ai, Phone/Text: +1 412-618-6238</p>
 
 
             </div>
