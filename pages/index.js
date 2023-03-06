@@ -89,6 +89,11 @@ export default function Home({ chatId }) {
     setMessages((prevMessages) => [...prevMessages, { "message": "Oops! There seems to be an error. Reach out to us here: https://discord.gg/KvG3azf39U", "type": "apiMessage" }]);
     setLoading(false);
     setUserInput("");
+    try {
+      mixpanel.track("frontend.oops.error")
+    } catch (err) {
+      console.error(err)
+    }
     Bugsnag.notify(new Error('Frontend OOPs error'), function(event) {
       //if (event.getUser().id === '1') return false
       event.severity = 'warning'
@@ -238,7 +243,9 @@ export default function Home({ chatId }) {
               console.error(err)
             }
           }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Schedule Demo</a>
+          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Get Help</a>
           <a href="https://berri.ai/" target="_blank" style={{ padding: "2%", backgroundColor: "#048c2c", borderRadius: "10px" }}>+ New App</a>
+          
           <div>
             <a href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
 
