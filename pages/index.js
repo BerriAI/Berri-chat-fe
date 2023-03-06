@@ -243,7 +243,7 @@ export default function Home({ chatId }) {
               console.error(err)
             }
           }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Schedule Demo</a>
-          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Get Help</a>
+          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Discord</a>
           <a href="https://berri.ai/" target="_blank" style={{ padding: "2%", backgroundColor: "#048c2c", borderRadius: "10px" }}>+ New App</a>
           
           <div>
