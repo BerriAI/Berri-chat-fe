@@ -242,15 +242,30 @@ export default function Home({ chatId }) {
             } catch (err) {
               console.error(err)
             }
-          }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Schedule Demo</a>
-          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Discord</a>
-          <a href="https://berri.ai/" target="_blank" style={{ padding: "2%", backgroundColor: "#048c2c", borderRadius: "10px" }}>+ New App</a>
-          
-          <div>
-            <a href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
-
-
-          </div>
+          }} className="mx-1 border-2 border-berri-yellow-base text-center p-1 sm:p-2 rounded-md"
+            >
+            <p className="hidden sm:block">Schedule Demo</p>
+            <p className="block sm:hidden">Demo</p>
+          </a>
+          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" className="mx-1 border-2 border-berri-yellow-base text-center p-1 sm:p-2 rounded-md">Discord</a>
+          <a href="https://berri.ai/" target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">+ New App</a>
+          <a className="hidden sm:block" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
+            <img 
+              alt="Add to Slack"
+              className="mx-1 w-40 h-140"
+              src="https://platform.slack-edge.com/img/add_to_slack.png" 
+              srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" 
+            />
+          </a>
+          <a className="block sm:hidden" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
+            <img 
+              alt="Slack Logo" 
+              width={25}
+              height={25}
+              src="https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/Slack-mark-RGB.png" 
+              srcSet="https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/Slack-mark-RGB.png 1x, https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/Slack-mark-RGB.png 2x" 
+            />
+          </a>
 
 
 
