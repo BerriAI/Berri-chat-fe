@@ -1,0 +1,53 @@
+{
+	"tokens": {
+		"colorData": [
+			{
+				"name": "Berri Red",
+				"baseColor": "#a20041",
+				"variants": {
+					"500": "#a20041"
+				}
+			},
+			{
+				"name": "Berri Pink",
+				"baseColor": "#e84981",
+				"variants": {
+					"500": "#e84981"
+				}
+			},
+			{
+				"name": "Berri Yellow",
+				"baseColor": "#f9dd51",
+				"variants": {
+					"200": "#fcf1b5",
+					"300": "#fbe784",
+					"500": "#f9dd51"
+				}
+			}
+		],
+		"typography": {
+			"fontSizes": [
+				{
+					"value": 1,
+					"unit": "rem",
+					"name": "sm"
+				},
+				{
+					"value": 1.2,
+					"unit": "rem",
+					"name": "md"
+				},
+				{
+					"value": 1.4,
+					"unit": "rem",
+					"name": "lg"
+				}
+			]
+		}
+	},
+	"__internal__": {
+		"migrations": {
+			"version": "0.0.3"
+		}
+	}
+}
