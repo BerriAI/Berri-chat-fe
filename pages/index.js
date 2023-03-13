@@ -257,14 +257,14 @@ export default function Home({ chatId }) {
 
 
 
-          {/*           <a className="hidden sm:block" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
+          <a className="hidden sm:block" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
             <img
               alt="Add to Slack"
               className="mx-1 w-40 h-140"
               src="https://platform.slack-edge.com/img/add_to_slack.png"
               srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
             />
-          </a> */}
+          </a>
           <a className="block sm:hidden" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
             <img
               alt="Slack Logo"
