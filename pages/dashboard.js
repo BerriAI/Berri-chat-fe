@@ -28,7 +28,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTableData = async () => {
       try {
-        const res = await fetch(`https://storeandqueryv5.ishaan-jaff.repl.co/get_projects?user_email=${userEmail}`);
+        const res = await fetch(`https://shareddbstorequery-7bea-8hjw.zeet-berri.zeet.app/get_projects?user_email=${userEmail}`);
         const data = await res.json();
         setTableData(data);
         console.log(data);
