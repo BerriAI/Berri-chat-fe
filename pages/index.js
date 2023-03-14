@@ -249,22 +249,22 @@ export default function Home({ chatId }) {
           </a>
 
           <Link href={`/dashboard?user_proj=${api_endpoint}`}>
-            <div className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">My Apps</div>
+            <div className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">My Instances</div>
           </Link>
-          <a href="https://berri.ai/" target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">+ New App</a>
+          <a href="https://berri.ai/" target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">+ New Instance</a>
           <a href="https://discord.com/invite/KvG3azf39U" target="_blank" className="mx-1 border-2 border-berri-yellow-base text-center p-1 sm:p-2 rounded-md">Discord</a>
 
 
 
 
-          <a className="hidden sm:block" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
+          {/* <a className="hidden sm:block" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
             <img
               alt="Add to Slack"
               className="mx-1 w-40 h-140"
               src="https://platform.slack-edge.com/img/add_to_slack.png"
               srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
             />
-          </a>
+          </a> */}
           <a className="block sm:hidden" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
             <img
               alt="Slack Logo"
@@ -284,7 +284,7 @@ export default function Home({ chatId }) {
           {/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
         </div>
       </div>
-      <p className="text-center text-sm mt-5 text-gray-400">Free plan: This app lives for 7 days, Sign up for our BerriAI:
+      <p className="text-center text-sm mt-5 text-gray-400">Free plan: This instance lives for 7 days, Sign up for our BerriAI:
         <a href="https://checkout.stripe.com/c/pay/cs_live_a1nhMmn3xZ6vbN9siaOHNIXiUSzk5EtRK9gvJWUiISn1AOxSvNhjAPpFR9#fidkdWxOYHwnPyd1blppbHNgWjA0SGFXQTxGMnFGXWk0TVRLbmpRVUl8SGdJRGphQTFfbUtKY0ozaEpnNjdwNFZCTTRUNU5fR09rfExiTjNxcmNxfWRHZFdKXU1mYl1GcFRdfDZDc0k2UTB1NTVDdzV8VlFAQycpJ3VpbGtuQH11anZgYUxhJz8nMG5EMW41NnFjMUk9M2R2YFBSJ3gl" target="_blank"> paid plan here</a>
 
       </p>
@@ -410,7 +410,8 @@ export default function Home({ chatId }) {
                   </svg>
                 </button>
               </div>
-              <p className="text-center text-sm mt-5 text-gray-400">Copy your API Endpoint for this QA bot</p>
+              
+<p className="text-center text-sm mt-5 text-gray-400">Copy your API Endpoint for this instance. <a href="https://enthusiastic-gold-impala.mintlify.app/introduction" target="_blank" rel="noopener noreferrer">📖 Go to the API Docs here</a>.</p>
               <p className="text-center text-sm mt-5 text-gray-400">Contact us, Email: ishaan@berri.ai, krrishdholakia@berri.ai, Phone/Text: +1 412-618-6238</p>
 
 
