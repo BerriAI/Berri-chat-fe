@@ -236,7 +236,7 @@ export default function Home({ chatId }) {
             }
           }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Edit the Code</a> */}
 
-          <a href="https://calendly.com/d/xz2-fqd-gqz/berri-ai-ishaan-krrish" target="_blank" onClick={() => {
+          <a href="https://calendly.com/ishaan-berri/30min" target="_blank" onClick={() => {
             try {
               mixpanel.track("schedule.demo.button.clicked")
             } catch (err) {
