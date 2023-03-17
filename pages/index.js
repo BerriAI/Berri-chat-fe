@@ -109,7 +109,21 @@ export default function Home({ chatId }) {
     // Get the value of the textarea
     const corrected_response = document.getElementById('feedback-other').value;
     // Send a request to the API with the user's selection
-    fetch(`https://BerriPromptLogsAPI.krrishdholakia.repl.co/add_log?repo=${api_endpoint}&user_message=${encodeURIComponent(JSON.stringify(messages))}&system_response=${systemResponse}&user_reaction=${feedbackType}&corrected_response=${corrected_response}`).then(() => {
+    console.log("api_endpoint: ", api_endpoint)
+    let instance_id = api_endpoint.split("/")
+    instance_id = instance_id[instance_id.length - 1];
+    console.log("instance_id: ", instance_id)
+    instance_id = instance_id.split("&")[0]
+    let user_email = api_endpoint.split("indexes/")[1].split("/")[0]
+    let data = [{ "context": JSON.stringify(messages), "correct_response": corrected_response }]
+    fetch(`https://api.berri.ai/finetune_instance?instance_id=${instance_id}&user_email=${user_email}`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then((response) => {
+      console.log(response.json())
       // Do something after the request is successful
       console.log("successfully posted")
     });
@@ -289,7 +303,33 @@ export default function Home({ chatId }) {
 
       </p>
       <main className={styles.main}>
-        {modalOpen ? <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500/90 transition-opacity dark:bg-gray-800/90"><div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all dark:bg-gray-900 sm:my-8 sm:w-full sm:p-6 sm:max-w-lg" id="headlessui-dialog-panel-:ra:" data-headlessui-state="open"><div class="flex items-center sm:flex"><div class="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 bg-green-100"><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-green-700" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div><div class="mt-3 text-center sm:mt-0 sm:text-left"><h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200" id="headlessui-dialog-title-:rb:" data-headlessui-state="open">Provide additional feedback</h3></div></div><form><textarea id="feedback-other" placeholder="What would the ideal answer have been?" rows="3" class="mt-4 mb-1 w-full rounded-md dark:bg-gray-800 dark:focus:border-white dark:focus:ring-white" style={{ "height": "90px", "overflow-y": "hidden" }} tabindex="0"></textarea></form><div class="mt-5 flex flex-col gap-3 sm:mt-4 sm:flex-row-reverse"><button class="btn flex justify-center gap-2 btn-neutral" onClick={closeModal}>Submit feedback</button></div></div></div> : null}
+        {modalOpen ? <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center transition-opacity bg-gray-800/90 z-50"><div class="relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all bg-gray-900 sm:my-8 sm:w-full sm:p-6 sm:max-w-lg" id="headlessui-dialog-panel-:ra:" data-headlessui-state="open"><div class="flex items-center sm:flex"><div class="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 bg-green-100"><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-green-700" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div><div class="mt-3 text-center sm:mt-0 sm:text-left"><h3 class="text-lg font-medium leading-6 text-gray-200" id="headlessui-dialog-title-:rb:" data-headlessui-state="open">Provide additional feedback</h3></div></div><form><textarea id="feedback-other" placeholder="What would the ideal answer have been?" rows="3" class="mt-4 mb-1 w-full rounded-md bg-gray-800 focus:border-white focus:ring-white" style={{ "height": "90px", "overflow-y": "hidden" }} tabindex="0"></textarea></form><div class="mt-5 flex flex-col gap-3 sm:mt-4 sm:flex-row-reverse"><button class="btn flex justify-center gap-2 btn-neutral" onClick={closeModal}>Submit feedback</button></div></div></div> : null}
+
+        <div class="relative inline-block text-left">
+          <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-700 shadow-sm px-4 py-2 bg-gray-700 text-sm font-medium text-white hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="options-menu" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-gray-900 ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" style={{ display: 'none' }}>
+
+            <div class="py-1" role="none">
+              <a href="#" class="text-gray-300 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-0">Option 1</a>
+              <a href="#" class="text-gray-300 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-1">Option 2</a>
+              <a href="#" class="text-gray-300 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="options-menu-2">Option 3</a>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
         <div className={styles.cloud}>
           <div ref={messageListRef} className={styles.messagelist}>
             {messages.map((message, index) => {
@@ -410,8 +450,8 @@ export default function Home({ chatId }) {
                   </svg>
                 </button>
               </div>
-              
-<p className="text-center text-sm mt-5 text-gray-400">Copy your API Endpoint for this instance. <a href="https://enthusiastic-gold-impala.mintlify.app/introduction" target="_blank" rel="noopener noreferrer">📖 Go to the API Docs here</a>.</p>
+
+              <p className="text-center text-sm mt-5 text-gray-400">Copy your API Endpoint for this instance. <a href="https://enthusiastic-gold-impala.mintlify.app/introduction" target="_blank" rel="noopener noreferrer">📖 Go to the API Docs here</a>.</p>
               <p className="text-center text-sm mt-5 text-gray-400">Contact us, Email: ishaan@berri.ai, krrishdholakia@berri.ai, Phone/Text: +1 412-618-6238</p>
 
 
