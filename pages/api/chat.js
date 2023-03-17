@@ -7,6 +7,7 @@ export default async function(req, res) {
   console.log("got query on FE");
   console.log(query);
   let chatId = req.body.chatId;
+  let model = req.body.model;
   const base64 = require('base64-js');
   const decoded_data = base64.toByteArray(chatId);
   const zeet_url = new TextDecoder().decode(decoded_data);
@@ -14,7 +15,7 @@ export default async function(req, res) {
   console.log(zeet_url);
   if (zeet_url.includes("berri_query")) {
     // send request to GPT Index server for top of funnel
-    endpoint = zeet_url + "&query="
+    endpoint = zeet_url + "&model=" + model + "&query=";
   } else {
     endpoint = zeet_url + '/langchain_agent?query=';
   }
