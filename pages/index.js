@@ -319,15 +319,15 @@ export default function Home({ chatId }) {
           {/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
         </div>
       </div>
-      <p className="text-center text-sm mt-1 text-gray-400">Free plan: This instance lives for 7 days, Sign up for our BerriAI:
-        <a href="https://checkout.stripe.com/c/pay/cs_live_a1nhMmn3xZ6vbN9siaOHNIXiUSzk5EtRK9gvJWUiISn1AOxSvNhjAPpFR9#fidkdWxOYHwnPyd1blppbHNgWjA0SGFXQTxGMnFGXWk0TVRLbmpRVUl8SGdJRGphQTFfbUtKY0ozaEpnNjdwNFZCTTRUNU5fR09rfExiTjNxcmNxfWRHZFdKXU1mYl1GcFRdfDZDc0k2UTB1NTVDdzV8VlFAQycpJ3VpbGtuQH11anZgYUxhJz8nMG5EMW41NnFjMUk9M2R2YFBSJ3gl" target="_blank"> paid plan here</a>
+      <p className="text-center text-sm mt-4 text-gray-400">Free plan: This instance lives for 7 days, Sign up for our BerriAI:
+        <a href="https://checkout.stripe.com/c/pay/cs_live_a1nhMmn3xZ6vbN9siaOHNIXiUSzk5EtRK9gvJWUiISn1AOxSvNhjAPpFR9#fidkdWxOYHwnPyd1blppbHNgWjA0SGFXQTxGMnFGXWk0TVRLbmpRVUl8SGdJRGphQTFfbUtKY0ozaEpnNjdwNFZCTTRUNU5fR09rfExiTjNxcmNxfWRHZFdKXU1mYl1GcFRdfDZDc0k2UTB1NTVDdzV8VlFAQycpJ3VpbGtuQH11anZgYUxhJz8nMG5EMW41NnFjMUk9M2R2YFBSJ3gl" target="_blank" style={{ textDecoration: 'underline' }}>paid plan here</a>
 
       </p>
       <main className={styles.main}>
         {modalOpen ? <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center transition-opacity bg-gray-800/90 z-50"><div class="relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all bg-gray-900 sm:my-8 sm:w-full sm:p-6 sm:max-w-lg" id="headlessui-dialog-panel-:ra:" data-headlessui-state="open"><div class="flex items-center sm:flex"><div class="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 bg-green-100"><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-green-700" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div><div class="mt-3 text-center sm:mt-0 sm:text-left"><h3 class="text-lg font-medium leading-6 text-gray-200" id="headlessui-dialog-title-:rb:" data-headlessui-state="open">Provide additional feedback</h3></div></div><form><textarea id="feedback-other" placeholder="What would the ideal answer have been?" rows="3" class="mt-4 mb-1 w-full rounded-md bg-gray-800 focus:border-white focus:ring-white" style={{ "height": "90px", "overflow-y": "hidden" }} tabindex="0"></textarea></form><div class="mt-5 flex flex-col gap-3 sm:mt-4 sm:flex-row-reverse"><button class="btn flex justify-center gap-2 btn-neutral" onClick={closeModal}>Submit feedback</button></div></div></div> : null}
 
 
-        <div className="mt-0 flex items-center justify-between">
+        <div className="mt-0 flex items-center justify-between" style={{ zIndex: 9999 }}>
           <p className="text-md text-gray-400">Model</p>
           <div className="rounded-lg p-4 border-white">
             <div className="relative inline-block text-left bg-black">
@@ -336,6 +336,7 @@ export default function Home({ chatId }) {
                   type="button"
                   className="inline-flex justify-center w-full rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-black text-sm font-medium text-gray-400 hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={toggleDropdown}
+                  style={{ padding: "10px" }}
                   aria-haspopup="true"
                 >
                   {selectedOption || "Select an option"}
