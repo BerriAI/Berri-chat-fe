@@ -2,6 +2,8 @@ import Bugsnag from '@bugsnag/js'
 
 Bugsnag.start({ apiKey: '6f3e42ec2b626188350d6820f1c713f0' })
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 export default async function(req, res) {
   let query = req.body.question;
   console.log("got query on FE");
