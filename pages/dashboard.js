@@ -40,28 +40,27 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
   //const { chatId } = router.query;
   console.log("curr url")
   console.log(currentUrl);
-  const userEmail = currentUrl.split('/')[5];
-  console.log(userEmail);
-
-  const [tableData, setTableData] = useState([]);
-
-  useEffect(() => {
-    const fetchTableData = async () => {
-      try {
-        const res = await fetch(`https://shareddbstorequery-7bea-8hjw.zeet-berri.zeet.app/get_projects?user_email=${userEmail}`);
-        const data = await res.json();
-        setTableData(data);
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchTableData();
-  }, []);
-
 
   if (isLoggedIn) {
+    const userEmail = user.email
+
+    const [tableData, setTableData] = useState([]);
+
+    useEffect(() => {
+      const fetchTableData = async () => {
+        try {
+          const res = await fetch(`https://shareddbstorequery-7bea-8hjw.zeet-berri.zeet.app/get_projects?user_email=${userEmail}`);
+          const data = await res.json();
+          setTableData(data);
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchTableData();
+    }, []);
+
     return (
       <div>
 
@@ -173,7 +172,7 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
   else {
     return (
       <div>
-        To get started, please log in as test user.
+        To get started, please log in to your account.
         <br />
         <button onClick={() => redirectToSignupPage()}>Sign up</button>
         <button onClick={() => redirectToLoginPage()}>Log in</button>
