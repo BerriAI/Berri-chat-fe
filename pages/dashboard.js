@@ -11,6 +11,19 @@ import mixpanel from 'mixpanel-browser';
 import Cohere from "cohere-js";
 import Link from 'next/link';
 
+function encodeLink(proj_directory) {
+  let endpoint = `https://shareddbstorequery-7bea-8hjw.zeet-berri.zeet.app/berri_query?proj_path=${proj_directory}`
+  console.log("in encode link");
+  console.log(endpoint);
+  const encodedEndpoint = Buffer.from(endpoint).toString('base64');
+  const encodedEndpointUrl = encodeURIComponent(encodedEndpoint);
+
+  //let encoded_endpoint_url = encodeURIComponent(endpoint);
+  console.log(encodedEndpointUrl);
+  endpoint = ` / ${encodedEndpointUrl}`;
+  return encodedEndpointUrl
+}
+
 
 const Dashboard = () => {
   const router = useRouter();
@@ -97,8 +110,6 @@ const Dashboard = () => {
           {/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
         </div>
       </div>
-
-
       <main className={styles.main}>
         <div>
           <h1>{tableData.length} Berris for {userEmail}</h1>
@@ -114,6 +125,9 @@ const Dashboard = () => {
                       {header}
                     </th>
                   ))}
+                  <th key="proj_uuid" scope="col" className="px-6 py-3">
+                    Instances
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -127,6 +141,12 @@ const Dashboard = () => {
                         {cell}
                       </td>
                     ))}
+                    <td key={`${i}-button`} className="px-6 py-4">
+                      <a href=
+                        {encodeLink(`indexes/${userEmail}/${row.proj_uuid}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Go
+                      </a>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -134,6 +154,7 @@ const Dashboard = () => {
           )
         }
       </main>
+
 
 
 

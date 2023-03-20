@@ -27,6 +27,18 @@ const customStyles = {
 // vercel 1
 
 export default function Home({ chatId }) {
+  const [projPrompt, setProjPrompt] = useState(`
+  Context information is below.
+---------------------
+{context_str}
+---------------------
+Given the context information and no prior knowledge, generate the answer in for {query_str}
+`);
+
+  function handleInputChange(event) {
+    setProjPrompt(event.target.value);
+  }
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("gpt-3.5-turbo");
 
@@ -365,17 +377,6 @@ export default function Home({ chatId }) {
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
         <div className={styles.cloud}>
 
           <div ref={messageListRef} className={styles.messagelist}>
@@ -520,12 +521,12 @@ export default function Home({ chatId }) {
 
 
             </div>
-            
+
 
 
           </div>
           <div className={styles.footer}>
-            <br/>
+            <br />
             <p>Powered by <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">BerriAI</a></p>
           </div>
         </div>
