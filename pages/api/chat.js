@@ -13,11 +13,24 @@ export default async function(req, res) {
   const base64 = require('base64-js');
   const decoded_data = base64.toByteArray(chatId);
   const zeet_url = new TextDecoder().decode(decoded_data);
+
+  const urlSearchParams = new URLSearchParams(new URL(zeet_url).search);
+  const proj_path = urlSearchParams.get('proj_path');
+  const user_email = proj_path.split('/')[1];
+  const proj_uuid = proj_path.split('/').pop();
+
+  console.log(user_email);
+  console.log(proj_uuid);
+
   let endpoint = "";
   console.log(zeet_url);
   if (zeet_url.includes("berri_query")) {
     // send request to GPT Index server for top of funnel
-    endpoint = zeet_url + "&model=" + model + "&query=";
+    const req_string = `?user_email=${user_email}&instance_id=${proj_uuid}&model=${model}&query=`;
+    endpoint = `https://api.berri.ai/query${req_string}`;
+    console.log("befor emaking req");
+    console.log(endpoint);
+
   } else {
     endpoint = zeet_url + '/langchain_agent?query=';
   }
