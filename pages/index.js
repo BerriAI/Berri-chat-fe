@@ -277,16 +277,15 @@ Given the context information and no prior knowledge, generate the answer in for
             } catch (err) {
               console.error(err)
             }
-          }} className="mx-1 border-2 border-berri-yellow-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-xs sm:text-sm"
+          }} className="border-2 border-berri-yellow-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-xs sm:text-sm mr-[-8px]"
           >
             <p className="hidden sm:block">Schedule Demo</p>
             <p className="block sm:hidden">Demo</p>
           </a>
 
+          <a href={`https://play.berri.ai/${chatId}`} target="_blank" className="flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-black text-xs sm:text-sm mr-[-8px]">Playground</a>
 
-          <a href="https://berri.ai/" target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-black text-xs sm:text-sm">+ New Instance</a>
-          <a href={`https://play.berri.ai/${chatId}`} target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-black text-xs sm:text-sm">Playground</a>
-          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" className="mx-1 border-2 border-berri-yellow-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-xs sm:text-sm">Discord</a>
+          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" className="border-2 border-berri-yellow-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-xs sm:text-sm mr-[-8px]">Discord</a>
 
         </div>
       </div >
