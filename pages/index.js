@@ -296,11 +296,9 @@ Given the context information and no prior knowledge, generate the answer in for
             <p className="block sm:hidden">Demo</p>
           </a>
 
-          <Link href={`/dashboard?user_proj=${api_endpoint}`}>
-            <div className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">My Instances</div>
-          </Link>
+
           <a href="https://berri.ai/" target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">+ New Instance</a>
-          <a href="https://play.berri.ai/" target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">Playground</a>
+          <a href={`https://play.berri.ai/${chatId}`} target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">Playground</a>
           <a href="https://discord.com/invite/KvG3azf39U" target="_blank" className="mx-1 border-2 border-berri-yellow-base text-center p-1 sm:p-2 rounded-md">Discord</a>
 
 
