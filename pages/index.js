@@ -218,11 +218,6 @@ Given the context information and no prior knowledge, generate the answer in for
       //setMessages((prevMessages) => [...prevMessages, { "message": data.result.success.references, "type": "apiMessage" }]);
 
 
-
-
-
-
-
     } else if (typeof data.result.success === "string") {
       setMessages((prevMessages) => [...prevMessages, { "message": data.result.success, "type": "apiMessage" }]);
       console.log("data.result.success is a string");
@@ -276,61 +271,25 @@ Given the context information and no prior knowledge, generate the answer in for
           <a href="/">BerriAI</a>
         </div>
         <div className={styles.navlinks}>
-          {/*           <a href="https://colab.research.google.com/drive/1R4e4dd-qr4XxPbOGdAIj0ybtliSlO4Zm?usp=sharing" target="_blank" onClick={() => {
-            try {
-              mixpanel.track("code.button.clicked")
-            } catch (err) {
-              console.error(err)
-            }
-          }} style={{ border: "2px solid green", padding: "2%", borderRadius: "10px" }}>Edit the Code</a> */}
-
           <a href="https://calendly.com/ishaan-berri/30min" target="_blank" onClick={() => {
             try {
               mixpanel.track("schedule.demo.button.clicked")
             } catch (err) {
               console.error(err)
             }
-          }} className="mx-1 border-2 border-berri-yellow-base text-center p-1 sm:p-2 rounded-md"
+          }} className="mx-1 border-2 border-berri-yellow-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-xs sm:text-sm"
           >
             <p className="hidden sm:block">Schedule Demo</p>
             <p className="block sm:hidden">Demo</p>
           </a>
 
 
-          <a href="https://berri.ai/" target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">+ New Instance</a>
-          <a href={`https://play.berri.ai/${chatId}`} target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center p-1.5 sm:p-2.5 rounded-md text-black">Playground</a>
-          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" className="mx-1 border-2 border-berri-yellow-base text-center p-1 sm:p-2 rounded-md">Discord</a>
+          <a href="https://berri.ai/" target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-black text-xs sm:text-sm">+ New Instance</a>
+          <a href={`https://play.berri.ai/${chatId}`} target="_blank" className="mx-1 flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-black text-xs sm:text-sm">Playground</a>
+          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" className="mx-1 border-2 border-berri-yellow-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-xs sm:text-sm">Discord</a>
 
-
-
-
-          {/* <a className="hidden sm:block" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
-            <img
-              alt="Add to Slack"
-              className="mx-1 w-40 h-140"
-              src="https://platform.slack-edge.com/img/add_to_slack.png"
-              srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
-            />
-          </a> */}
-          <a className="block sm:hidden" href="https://tempslack.ishaan-jaff.repl.co/slack/install" target="_blank">
-            <img
-              alt="Slack Logo"
-              width={25}
-              height={25}
-              src="https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/Slack-mark-RGB.png"
-              srcSet="https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/Slack-mark-RGB.png 1x, https://mirrorful-production.s3.us-west-1.amazonaws.com/assets/Slack-mark-RGB.png 2x"
-            />
-          </a>
-
-
-
-
-
-
-          {/*           <a href="https://discord.com/invite/KvG3azf39U" target="_blank">Discord</a> */}
-          {/*           <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">GitHub</a> */}
         </div>
-      </div>
+      </div >
       <main className={styles.main}>
         {modalOpen ? <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center transition-opacity bg-gray-800/90 z-50"><div class="relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all bg-gray-900 sm:my-8 sm:w-full sm:p-6 sm:max-w-lg" id="headlessui-dialog-panel-:ra:" data-headlessui-state="open"><div class="flex items-center sm:flex"><div class="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 bg-green-100"><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-green-700" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div><div class="mt-3 text-center sm:mt-0 sm:text-left"><h3 class="text-lg font-medium leading-6 text-gray-200" id="headlessui-dialog-title-:rb:" data-headlessui-state="open">Provide additional feedback</h3></div></div><form><textarea id="feedback-other" placeholder="What would the ideal answer have been?" rows="3" class="mt-4 mb-1 w-full rounded-md bg-gray-800 focus:border-white focus:ring-white" style={{ "height": "90px", "overflow-y": "hidden" }} tabindex="0"></textarea></form><div class="mt-5 flex flex-col gap-3 sm:mt-4 sm:flex-row-reverse"><button class="btn flex justify-center gap-2 btn-neutral" onClick={closeModal}>Submit feedback</button></div></div></div> : null}
 
