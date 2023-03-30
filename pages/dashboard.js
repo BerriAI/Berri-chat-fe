@@ -170,14 +170,16 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
     )
   }
   else {
-    return (
-      <div>
-        To get started, please log in to your account.
-        <br />
-        <button onClick={() => redirectToSignupPage()}>Sign up</button>
-        <button onClick={() => redirectToLoginPage()}>Log in</button>
-      </div>
-    );
+    // return (
+
+    //   <div>
+    //     To get started, please log in to your account.
+    //     <br />
+    //     <button onClick={() => redirectToSignupPage()}>Sign up</button>
+    //     <button onClick={() => redirectToLoginPage()}>Log in</button>
+    //   </div>
+    // );
+    redirectToLoginPage();
   };
 
 });
