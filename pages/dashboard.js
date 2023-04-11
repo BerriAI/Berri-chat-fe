@@ -21,7 +21,7 @@ function encodeLink(proj_directory) {
   console.log("in encode link");
   console.log(endpoint);
   const encodedEndpoint = Buffer.from(endpoint).toString('base64');
-  const encodedEndpointUrl = encodeURIComponent(encodedEndpoint);
+  const encodedEndpointUrl = "https://play.berri.ai/" + encodeURIComponent(encodedEndpoint);
 
   //let encoded_endpoint_url = encodeURIComponent(endpoint);
   console.log(encodedEndpointUrl);
