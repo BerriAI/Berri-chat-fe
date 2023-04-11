@@ -13,6 +13,8 @@ export default async function(req, res) {
   const base64 = require('base64-js');
   const decoded_data = base64.toByteArray(chatId);
   const zeet_url = new TextDecoder().decode(decoded_data);
+  console.log('zeet url');
+  console.log(zeet_url);
 
   const urlSearchParams = new URLSearchParams(new URL(zeet_url).search);
   const proj_path = urlSearchParams.get('proj_path');
@@ -26,7 +28,11 @@ export default async function(req, res) {
   console.log(zeet_url);
   if (zeet_url.includes("berri_query")) {
     // send request to GPT Index server for top of funnel
-    const req_string = `?user_email=${user_email}&instance_id=${proj_uuid}&model=${model}&query=`;
+    let req_string = `?user_email=${user_email}&instance_id=${proj_uuid}&model=${model}`;
+    if (zeet_url.includes("abhi")) {
+      req_string += '&version=2'
+    }
+    req_string += '&query='
     endpoint = `https://api.berri.ai/query${req_string}`;
     console.log("befor emaking req");
     console.log(endpoint);
