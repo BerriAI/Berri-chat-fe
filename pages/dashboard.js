@@ -51,7 +51,7 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
       const fetchTableData = async () => {
         try {
           console.log("Calling dashboard");
-          const res = await fetch(`https://storequeryabhi2-aylu.zeet-berri.zeet.app/get_projects?user_email=ishaan@berri.ai`);
+          const res = await fetch(`https://shareddbstorequery-7bea-8hjw.zeet-berri.zeet.app/get_projects?user_email=${userEmail}`);
           const data = await res.json();
           setTableData(data);
           console.log(data);
