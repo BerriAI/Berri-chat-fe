@@ -34,6 +34,7 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
   const { redirectToSignupPage, redirectToLoginPage } = useRedirectFunctions();
   console.log(user, isLoggedIn)
   const router = useRouter();
+  console.log("Calling dashboard step 0");
 
 
   const currentUrl = router.asPath;
@@ -49,7 +50,8 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
     useEffect(() => {
       const fetchTableData = async () => {
         try {
-          const res = await fetch(`https://storequeryabhi2-aylu.zeet-berri.zeet.app/get_projects?user_email=${userEmail}`);
+          console.log("Calling dashboard");
+          const res = await fetch(`https://storequeryabhi2-aylu.zeet-berri.zeet.app/get_projects?user_email=ishaan@berri.ai`);
           const data = await res.json();
           setTableData(data);
           console.log(data);
@@ -131,7 +133,7 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
                         {header}
                       </th>
                     ))}
-                    <th key="proj_uuid" scope="col" className="px-6 py-3">
+                    <th key="instance_id" scope="col" className="px-6 py-3">
                       Instances
                     </th>
                   </tr>
