@@ -17,7 +17,7 @@ import Cohere from "cohere-js";
 import Link from 'next/link';
 
 function encodeLink(proj_directory) {
-  let endpoint = `https://shareddbstorequery-7bea-8hjw.zeet-berri.zeet.app/berri_query?proj_path=${proj_directory}`
+  let endpoint = `https://storequeryabhi2-aylu.zeet-berri.zeet.app/berri_query?proj_path=${proj_directory}`
   console.log("in encode link");
   console.log(endpoint);
   const encodedEndpoint = Buffer.from(endpoint).toString('base64');
