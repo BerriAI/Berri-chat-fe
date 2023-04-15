@@ -51,8 +51,11 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
       const fetchTableData = async () => {
         try {
           console.log("Calling dashboard");
-          const res = await fetch(`https://shareddbstorequery-7bea-8hjw.zeet-berri.zeet.app/get_projects?user_email=${userEmail}`);
+          console.log(`https://storequeryabhi2-aylu.zeet-berri.zeet.app/get_projects?user_email=${userEmail}`);
+          const res = await fetch(`https://storequeryabhi2-aylu.zeet-berri.zeet.app/get_projects?user_email=${userEmail}`);
           const data = await res.json();
+          console.log("getting projects");
+          console.log(data);
           setTableData(data);
           console.log(data);
         } catch (error) {
@@ -124,43 +127,49 @@ const Dashboard = withAuthInfo(({ user, isLoggedIn }) => {
           </div>
 
           {
-            tableData.length > 0 && (
-              <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                  <tr>
-                    {Object.keys(tableData[0]).map((header) => (
-                      <th key={header} scope="col" className="px-6 py-3">
-                        {header}
-                      </th>
-                    ))}
-                    <th key="instance_id" scope="col" className="px-6 py-3">
-                      Instances
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tableData.map((row, i) => (
-                    <tr
-                      key={i}
-                      className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b dark:bg-gray-800 dark:border-gray-700`}
-                    >
-                      {Object.values(row).map((cell, j) => (
-                        <td key={j} className="px-6 py-4">
-                          {cell}
-                        </td>
-                      ))}
-                      <td key={`${i}-button`} className="px-6 py-4">
-                        <a href=
-                          {encodeLink(`indexes/${userEmail}/${row.proj_uuid}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                          Go
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )
-          }
+  tableData.length > 0 && (
+    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          {Object.keys(tableData[0])
+            .filter((header) => header !== 'source_data_map' && header !== 'app_config') // Filter out 'source_data_map' and 'app_config'
+            .map((header) => (
+              <th key={header} scope="col" className="px-6 py-3">
+                {header}
+              </th>
+            ))}
+          <th key="instance_id" scope="col" className="px-6 py-3">
+            Instances
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {tableData.map((row, i) => (
+          <tr
+            key={i}
+            className={`${i % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b dark:bg-gray-800 dark:border-gray-700`}
+          >
+            {Object.entries(row)
+              .filter(([key]) => key !== 'source_data_map' && key !== 'app_config') // Filter out 'source_data_map' and 'app_config'
+              .map(([key, value], j) => (
+                <td key={j} className="px-6 py-4">
+                  {value}
+                </td>
+              ))}
+            <td key={`${i}-button`} className="px-6 py-4">
+              <a href={encodeLink(`indexes/${userEmail}/${row.proj_uuid}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Go
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
+
+          
         </main>
 
 
