@@ -266,30 +266,13 @@ Given the context information and no prior knowledge, generate the answer in for
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.topnav}>
-        <div className={styles.navlogo}>
-          <a href="/">BerriAI</a>
-        </div>
-        <div className={styles.navlinks}>
-          <a href="https://calendly.com/ishaan-berri/30min" target="_blank" onClick={() => {
-            try {
-              mixpanel.track("schedule.demo.button.clicked")
-            } catch (err) {
-              console.error(err)
-            }
-          }} className="border-2 border-berri-yellow-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-xs sm:text-sm mr-[-8px]"
-          >
-            <p className="hidden sm:block">Schedule Demo</p>
-            <p className="block sm:hidden">Demo</p>
-          </a>
 
-          <a href={`https://play.berri.ai/${chatId}`} target="_blank" className="flex-shrink-0 bg-gradient-to-r from-berri-yellow-200 to-berri-pink-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-black text-xs sm:text-sm mr-[-8px]">Playground</a>
 
-          <a href="https://discord.com/invite/KvG3azf39U" target="_blank" className="border-2 border-berri-yellow-base text-center py-1 px-2 sm:py-2 sm:px-4 rounded-md text-xs sm:text-sm mr-[-8px]">Discord</a>
-
-        </div>
-      </div >
       <main className={styles.main}>
+        <div className={styles.footer}>
+          <br />
+          <p>Powered by <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">BerriAI</a></p>
+        </div>
         {modalOpen ? <div class="fixed top-0 left-0 w-full h-full flex items-center justify-center transition-opacity bg-gray-800/90 z-50"><div class="relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all bg-gray-900 sm:my-8 sm:w-full sm:p-6 sm:max-w-lg" id="headlessui-dialog-panel-:ra:" data-headlessui-state="open"><div class="flex items-center sm:flex"><div class="mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:h-10 sm:w-10 bg-green-100"><svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-green-700" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></div><div class="mt-3 text-center sm:mt-0 sm:text-left"><h3 class="text-lg font-medium leading-6 text-gray-200" id="headlessui-dialog-title-:rb:" data-headlessui-state="open">Provide additional feedback</h3></div></div><form><textarea id="feedback-other" placeholder="What would the ideal answer have been?" rows="3" class="mt-4 mb-1 w-full rounded-md bg-gray-800 focus:border-white focus:ring-white" style={{ "height": "90px", "overflow-y": "hidden" }} tabindex="0"></textarea></form><div class="mt-5 flex flex-col gap-3 sm:mt-4 sm:flex-row-reverse"><button class="btn flex justify-center gap-2 btn-neutral" onClick={closeModal}>Submit feedback</button></div></div></div> : null}
 
         <div className={styles.cloud}>
@@ -396,36 +379,8 @@ Given the context information and no prior knowledge, generate the answer in for
                   </svg>}
               </button>
             </form>
-            <div className="h-64 w-full flex-wrap items-start justify-between">
-              <div className="w-full flex pt-10 text-center">
-                <input type="text" readOnly className="w-5/6 rounded-lg border border-gray-700 bg-transparent p-2 text-sm mr-2" value={create_instance_endpoint} />
-
-                <button onClick={() => {
-                  navigator.clipboard.writeText(create_instance_endpoint);
-                  try {
-                    mixpanel.track("api.endpoint.copied")
-                  } catch (err) {
-                    console.error(err)
-                  }
-                }} className="flex h-full w-1/6 items-center justify-center rounded-lg border border-gray-400 py-2 text-gray-600 hover:bg-gray-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
-                  </svg>
-                </button>
-              </div>
-              <p className="text-center text-sm mt-5 text-gray-400"> curl command to create your own instance. <a href="https://enthusiastic-gold-impala.mintlify.app/api-reference/endpoint/create_app" target="_blank" rel="noopener noreferrer">📖 Go to the API Docs here</a>.</p>
-              <p className="text-center text-sm mt-5 text-gray-400">Contact us, Email: ishaan@berri.ai, krrishdholakia@berri.ai, Phone/Text: +1 412-618-6238</p>
-
-
-            </div>
-
-
-
           </div>
-          <div className={styles.footer}>
-            <br />
-            <p>Powered by <a href="https://github.com/ClerkieAI/berri_ai" target="_blank">BerriAI</a></p>
-          </div>
+
         </div>
       </main>
     </>
