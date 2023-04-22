@@ -3,6 +3,7 @@ import Bugsnag from '@bugsnag/js'
 Bugsnag.start({ apiKey: '6f3e42ec2b626188350d6820f1c713f0' })
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const history = [];
 
 export default async function(req, res) {
   let query = req.body.question;
@@ -28,7 +29,7 @@ export default async function(req, res) {
   console.log(zeet_url);
   if (zeet_url.includes("berri_query")) {
     // send request to GPT Index server for top of funnel
-    let req_string = `?user_email=${user_email}&instance_id=${proj_uuid}&model=${model}`;
+    let req_string = `?user_email=${user_email}&instance_id=${proj_uuid}&model=${model}&history=${JSON.stringify(history)}`;
     if (zeet_url.includes("abhi")) {
       req_string += '&version=2'
     }
@@ -46,6 +47,9 @@ export default async function(req, res) {
     const response = await fetch(endpoint + query, { timeout: 60 * 1000 });
     const data = await response.json();
     console.log("GOT DATA");
+    // only get data.response
+    history.push({ query: query, response: data.response });
+    console.log("Appended to history", history);
     res.status(200).json({ result: { success: data } })
 
 
