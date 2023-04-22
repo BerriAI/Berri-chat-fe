@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  background-color: #ECECF1;
+  background-color: #ffffff;
 }
 
 .header {
@@ -17,7 +17,7 @@
 }
 
 .topnav {
-  background-color: #ECECF1;
+  background-color: #ffffff;
   border-bottom: 1px solid #30373d;
   display: flex;
   justify-content: space-between;
@@ -25,7 +25,8 @@
   align-items: center;
 }
 
-.navlogo, .navlinks a {
+.navlogo,
+.navlinks a {
   font-weight: 500;
 }
 
@@ -69,7 +70,7 @@
   width: 75vw;
   border-radius: 0.5rem;
   border: 1px solid #30373d;
-  background: #ECECF1;
+  background: #ffffff;
   color: #070809;
   outline: none;
 }
@@ -132,14 +133,14 @@
 }
 
 .usermessage {
-  background: #ECECF1;
+  background: #ffffff;
   padding: 1.5rem;
   color: #30373d;
 }
 
 .usermessagewaiting{
   padding: 1.5rem;
-  color: #ECECF1;
+  color: #30373d;
   background: linear-gradient(to left, #f7f7f7, #ffffff, #f7f7f7);
   background-size: 200% 200%;
   background-position: -100% 0;
@@ -158,7 +159,7 @@
 }
 
 .apimessage {
-  background: #ECECF1;
+  background: #ffffff;
   padding: 1.5rem;
   color: #30373d;
   animation: fadein 0.5s;
@@ -258,7 +259,6 @@
 
 /* Mobile optimization */
 @media (max-width: 600px) {
-
   .main {
     padding: 1rem;
     max-height: 90vh;
@@ -332,8 +332,8 @@
 }
 
 .refsWrapper {
-  background-color: white;
-  border: 1px solid #E5E7EB;
+  background-color: rgb(205, 11, 11);
+  border: 1px solid #0a51de;
   color: #4B5563;
   font-size: 14px;
   font-weight: 500;
