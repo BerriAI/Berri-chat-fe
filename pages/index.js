@@ -304,9 +304,9 @@ Given the context information and no prior knowledge, generate the answer in for
                             style={{
                               padding: "1%",
                               backgroundColor: "transparent",
-                              border: "1px solid #fff",
+                              border: "1px solid #000",
                               borderRadius: "5px",
-                              color: "#fff",
+                              color: "#000",
                               fontSize: "0.8em",
                             }}
                           >
