@@ -297,25 +297,7 @@ Given the context information and no prior knowledge, generate the answer in for
                     {message.type === "apiMessage" && message.mostRecent && (
                       <div className="refs-container">
                         <div className="button-container">
-                          <button
-                            className={`${styles.refsWrapper} ${showReferences ? styles.expanded : ""
-                              }`}
-                            onClick={handleShowReferences}
-                            style={{
-                              padding: "1%",
-                              backgroundColor: "transparent",
-                              border: "1px solid #000",
-                              borderRadius: "5px",
-                              color: "#000",
-                              fontSize: "0.8em",
-                            }}
-                          >
-                            <span className={styles.collapseIcon}>
-                              {showReferences ? "▲" : "▼"}
-                            </span>
-                            {showReferences ? "Hide References" : "Show References"}
-
-                          </button>
+                          
                         </div>
                         {showReferences && message.mostRecent && message.references && (
                           <div className="references">
